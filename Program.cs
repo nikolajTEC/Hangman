@@ -17,7 +17,7 @@
             //Random random = new Random();
             //int randomIndex = random.Next(0, words.Length);
             //string randomWord = words[randomIndex];
-            string randomWord = APIKald.ApiKald(); 
+            string randomWord = APIKald.ApiKald();
             char[] guessedLetters = new char[randomWord.Length];
 
             for (int i = 0; i < guessedLetters.Length; i++)

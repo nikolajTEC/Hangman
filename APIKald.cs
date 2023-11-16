@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 namespace Hangman
 {
     public class APIKald
@@ -11,20 +11,11 @@ namespace Hangman
         public static string ApiKald()
         {
             //string apiUrl = "https://random-word-api.herokuapp.com/word";
-            string apiUrl = "https://random-word-form.repl.co/random/noun?count=10";
+            string apiUrl = "https://random-word-form.repl.co/random/noun?";
             var randomWord = "";
             try
             {
-                 randomWord = GetRandomWord(apiUrl);
-
-                if (randomWord != null)
-                {
-                    Console.WriteLine($"Random word: {randomWord}");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to retrieve a random word.");
-                }
+                randomWord = GetRandomWord(apiUrl);
             }
             catch (Exception ex)
             {
@@ -41,10 +32,13 @@ namespace Hangman
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsonResult = response.Content.ReadAsStringAsync().Result;
-                    int startIndex = jsonResult.IndexOf("\"word\":\"") + 8;
-                    int endIndex = jsonResult.IndexOf("\"", startIndex);
-                    string randomWord = jsonResult.Substring(startIndex, endIndex - startIndex);
+                    string apiResult = response.Content.ReadAsStringAsync().Result;
+
+                    // Deserialize JSON array to a List<string>
+                    var deserializedObject = JsonConvert.DeserializeObject<string[]>(apiResult);
+
+                    // Access the first element of the array
+                    string randomWord = deserializedObject?.FirstOrDefault(); // Handle the case where deserializedObject is null
                     return randomWord;
                 }
                 else
