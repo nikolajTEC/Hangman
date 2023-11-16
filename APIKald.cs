@@ -10,8 +10,8 @@ namespace Hangman
     {
         public static string ApiKald()
         {
-            //string apiUrl = "https://random-word-api.herokuapp.com/word?lang=es";
-            string apiURL = 
+            //string apiUrl = "https://random-word-api.herokuapp.com/word";
+            string apiUrl = "https://random-word-form.repl.co/random/noun?count=10";
             var randomWord = "";
             try
             {

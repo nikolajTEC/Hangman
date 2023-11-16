@@ -8,16 +8,16 @@
         static char[] incorrectLetters = new char[7];
         static void Main(string[] args)
         {
-            //words = API.ApiKald();
             Console.WriteLine("Velkommen til hangman");
             StartGame();
         }
         private static void StartGame()
         {
             bool gameOver;
-            Random random = new Random();
-            int randomIndex = random.Next(0, words.Length);
-            string randomWord = words[randomIndex];
+            //Random random = new Random();
+            //int randomIndex = random.Next(0, words.Length);
+            //string randomWord = words[randomIndex];
+            string randomWord = APIKald.ApiKald(); 
             char[] guessedLetters = new char[randomWord.Length];
 
             for (int i = 0; i < guessedLetters.Length; i++)
